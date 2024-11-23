@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: microservice-foroum # Nombre de la aplicación en Eureka
+
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://servidorprofilesbd.database.windows.net:1433;database=realforumdb;user=profilesadmin;password=12344321Q@$;encrypt=true;trustServerCertificate=false;loginTimeout=30; # Connection string de la base de datos en la nube
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: com.microservice.foroum.shared.infrastructure.persistence.jpa.configuration.strategy.SnakeCaseNameStrat
+    open-in-view: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: sql_server
+    database-platform: org.hibernate.dialect.SQLServerDialect
+
+  config:
+    import: optional:configserver:https://microservicioconfig.azurewebsites.net
+
+eureka:
+  instance:
+    hostname: microservice-foroum.azurewebsites.net
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: https://eurekamsvc.azurewebsites.net/eureka/  # URL de Eureka en la nube
+
+server:
+  port: 8085 # Puerto en el que el microservicio 'foroum' se ejecutará
