@@ -22,7 +22,7 @@ spring:
 
 eureka:
   instance:
-    hostname: microservice-foroum.azurewebsites.net
+    hostname: forumchaqui.azurewebsites.net
     prefer-ip-address: false
   client:
     service-url:
